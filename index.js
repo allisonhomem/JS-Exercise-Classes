@@ -83,7 +83,30 @@ console.log(allison);
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+    this.driveableMiles = this.tank * this.milesPerGallon;
+  }
+
+  fill(gallons){
+    this.tank = this.tank + gallons;
+    this.driveableMiles = this.tank * this.milesPerGallon;
+  }
+
+  drive(distance){
+    if(distance < this.driveableMiles){ 
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance/this.milesPerGallon);
+    }
+    else{
+      this.odometer = this.odometer + this.driveableMiles;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
 }
 
 /*
